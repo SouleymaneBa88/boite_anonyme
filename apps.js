@@ -51,10 +51,13 @@ async function loadMessages() {
     return data;
 }
 // Afficher les cartes
-async function afficherCartes() {
+async function afficherCartes(message =null) {
+    if(!message){
+         message = await loadMessages();
 
-    const message = await loadMessages();
+    }
 
+    const maxletter = 255
     const cards = document.getElementById("card");
     const total = document.getElementById("Total_idee");
 
@@ -88,45 +91,72 @@ async function afficherCartes() {
         </div>
     `).join("");
 
-    total.textContent = message.length;
+    total.textContent = maxletter - message.length;
 }
 //filtrer par categorie
-const boutons = document.querySelectorAll(".btn-filtre");
+function filtreCategorie() {
 
-boutons.forEach((btn) => {
-    btn.addEventListener("click", async () => {
+    const boutons = document.querySelectorAll(".btn-filtre");
 
-        const categorie = btn.dataset.categorie;
+    boutons.forEach((btn) => {
 
-        //  RESET 
-        boutons.forEach((b) => {
-            b.classList.remove("bg-green", "text-black", "font-bold");
-            b.classList.add("bg-[#111a2e]", "border", "border-[#26324a]");
+        btn.addEventListener("click", async () => {
+
+            const categorie = btn.dataset.categorie;
+            console.log("Catégorie cliquée :", categorie);
+            // RESET boutons
+            boutons.forEach((b) => {
+                b.classList.remove("bg-green", "text-black", "font-bold");
+                b.classList.add(
+                    "bg-[#111a2e]",
+                    "border",
+                    "border-[#26324a]"
+                );
+            });
+
+            // Bouton actif
+            btn.classList.add(
+                "bg-green",
+                "text-black",
+                "font-bold"
+            );
+
+            btn.classList.remove(
+                "bg-[#111a2e]",
+                "border",
+                "border-[#26324a]"
+            );
+
+            try {
+
+                let query = supabaseClient
+                    .from("messages")
+                    .select("*")
+                    .order("created_at", { ascending: false });
+
+                if (categorie !== "tout") {
+                    query = query.eq("categorie", categorie);
+                }
+
+                const { data, error } = await query;
+
+                if (error) {
+                    throw error;
+                }
+
+                afficherCartes(data);
+
+            } catch (error) {
+                console.error("Erreur filtre :", error);
+            }
+
         });
 
-        // ACTIVE BUTTON
-        btn.classList.add("bg-green", "text-black", "font-bold");
-        btn.classList.remove("bg-[#111a2e]", "border", "border-[#26324a]");
-
-        // QUERY SUPABASE
-        let query = supabaseClient
-            .from("messages")
-            .select("*");
-
-        if (categorie !== "tout") {
-            query = query.eq("categorie", categorie);
-        }
-
-        const { data, error } = await query;
-
-        if (error) {
-            console.error("Erreur filtre :", error);
-            return;
-        }
-
-        afficherCartes();
     });
-});
+
+}
+afficherCartes();
+filtreCategorie();
 
 const input = document.getElementById('titre')
 // fonction de validation du titre de l'idee
@@ -250,11 +280,8 @@ document.getElementById("form")
 
     try{
     await addIdee(data)
-
-    afficherCartes();
+    await afficherCartes();
     form.reset();
-
-
     }
     catch (error){
         console.error(error);
@@ -277,8 +304,7 @@ document.getElementById("form")
 
 
 
-afficherCartes();
-// filtreCategorie();
+ afficherCartes();
 
 // delete
 let deleteId = null;
@@ -384,7 +410,7 @@ document.getElementById("editForm")
         return
     }
     await loadMessages()
-    afficherCartes()
+    await afficherCartes()
     closeEditModal()
 
 });
@@ -422,7 +448,7 @@ async function genericCategorie(titre,description) {
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions",{
         method:"POST",
         headers:{
-            authorization:`Bearer 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`,
+            authorization:`Bearer `,
             "content-Type":"application/json"
         },
         body:JSON.stringify({
