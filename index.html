@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sunu-Idée UI</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg: "#0b1220",
+            card: "#111a2e",
+            stroke: "#26324a",
+            green: "#00e676"
+          },
+          fontFamily: {
+            sans: ["Inter", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-[#0b1220] text-white font-sans">
+
+<!-- NAV -->
+<div class="sticky top-0 z-50 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 px-4 sm:px-6 py-4 border-b border-[#26324a] bg-[#0b1220] shadow-md backdrop-blur-md">
+  
+  <div class="flex items-center gap-2">
+    <div class="w-10 h-10 rounded-lg flex items-center justify-center">
+        <img src="images/image.png" class="w-full h-full object-contain">
+    </div>
+    <h1 class="font-bold">Sunu-Idée</h1>
+  </div>
+
+  <div class="px-3 py-1 rounded-full bg-[#111a2e] border border-[#26324a] text-sm" id="User">
+    Anonyme #492
+  </div>
+
+</div>
+
+<!-- MAIN -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+  <!-- LEFT -->
+  <div class="lg:col-span-8 space-y-6">
+
+    <!-- HERO -->
+    <div class="bg-[#111a2e] border border-[#26324a] rounded-2xl p-4 sm:p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+
+      <div>
+        <span class="text-xs px-2 py-1 bg-green/10 text-green rounded-full">
+          Promo P9
+        </span>
+
+        <h2 class="text-2xl sm:text-3xl font-bold mt-3">
+          Vos idées construisent <br>
+          <span class="text-green">l’avenir de la promo</span>
+        </h2>
+
+        <p class="text-gray-400 text-sm mt-2">
+          Boîte à idées anonyme et collaborative
+        </p>
+      </div>
+
+      <div class="w-45 h-28 sm:w-28 sm:h-28 hidden md:flex items-center justify-center">
+        <img src="images/image.png" class=" object-contain rounded">
+      </div>
+
+    </div>
+
+    <!-- STATS -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+      <div class="bg-[#111a2e] border border-[#26324a] p-4 rounded-xl">
+        <h3 class="text-2xl font-bold" id="Total_idee">0</h3>
+        <p class="text-gray-400 text-xs">Total idées</p>
+      </div>
+
+      <div class="bg-[#111a2e] border border-[#26324a] p-4 rounded-xl">
+        <h3 class="font-bold">4</h3>
+        <p class="text-gray-400 text-xs">Total categories</p>
+      </div>
+
+      <div class="bg-[#111a2e] border border-[#26324a] p-4 rounded-xl">
+        <h3 class="font-bold" id="dernierAction">Il y a 2h</h3>
+        <p class="text-gray-400 text-xs">Dernière idée</p>
+      </div>
+
+    </div>
+
+    <!-- FILTER -->
+    <div class="flex flex-col sm:flex-row gap-3">
+
+      <input class="flex-1 bg-[#111a2e] border border-[#26324a] px-4 py-2 rounded-xl w-full"
+        placeholder="Rechercher une idée..." id="Rechercher"/>
+
+      <div class="flex gap-2 flex-wrap" id="filtre">
+
+        <button
+          class="btn-filtre bg-[#111a2e] border border-[#26324a] px-4 rounded-xl "
+          data-categorie="tout">
+          Toutes
+        </button>
+
+        <button
+          class="btn-filtre bg-[#111a2e] border border-[#26324a] px-4 rounded-xl"
+          data-categorie="pedagogie">
+          Pédagogie
+        </button>
+
+        <button
+          class="btn-filtre bg-[#111a2e] border border-[#26324a] px-4 rounded-xl"
+          data-categorie="evenement">
+          Événement
+        </button>
+
+        <button
+          class="btn-filtre bg-[#111a2e] border border-[#26324a] px-4 rounded-xl"
+          data-categorie="amelioration">
+          Amelioration
+        </button>
+
+        <button
+          class="btn-filtre bg-[#111a2e] border border-[#26324a] px-4 rounded-xl"
+          data-categorie="campus">
+          Campus
+        </button>
+
+      </div>
+    </div>
+
+    <!-- CARDS -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" Id="card">
+      
+    </div>
+
+  </div>
+
+  <!-- RIGHT -->
+  <div class="lg:col-span-4">
+    <form class="bg-[#111a2e] border border-[#26324a] rounded-2xl p-5 space-y-4 lg:sticky lg:top-6" method="post" id="form">
+
+    <!-- TITLE -->
+    <h2 class="font-bold text-lg">Nouvelle idée</h2>
+
+    <!-- TITRE -->
+    <div>
+        <label class="text-sm text-gray-300">Titre</label>
+        <input 
+        type="text"
+        name="titre"
+        class="w-full mt-1 bg-[#0b1220] border border-[#26324a] p-3 rounded-lg focus:outline-none "
+        placeholder="Titre de l'idée"
+        id="titre"
+        />
+        <p id="titre-error"></p>
+    </div>
+
+    <!-- DESCRIPTION -->
+    <div>
+        <label class="text-sm text-gray-300">Description</label>
+        <textarea 
+        name="description"
+        rows="4"
+        required
+        class="w-full mt-1 bg-[#0b1220] border border-[#26324a] p-3 rounded-lg focus:outline-none  resize-none"
+        placeholder="Décris ton idée..."
+        ></textarea>
+        <p id="textarea-error"></p>
+        <p id="count"></p>
+    </div>
+
+    <!-- BUTTON -->
+    <button 
+        type="submit"
+        class="w-full bg-green text-black font-bold py-3 rounded-lg hover:opacity-90 transition"
+        id="btn"
+    >
+        Publier
+    </button>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<!--modal pour la suppression-->
+<el-dialog>
+  <dialog id="dialog" aria-labelledby="dialog-title" class="fixed inset-0 size-auto max-h-none max-w-none overflow-y-auto bg-transparent backdrop:bg-transparent">
+    <el-dialog-backdrop class="fixed inset-0 bg-gray-900/50 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"></el-dialog-backdrop>
+
+    <div tabindex="0" class="flex min-h-full items-end justify-center p-4 text-center focus:outline-none sm:items-center sm:p-0">
+      <el-dialog-panel class="relative transform overflow-hidden rounded-lg bg-[#111a2e] text-left shadow-xl outline -outline-offset-1 outline-white/10 transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95">
+        <div class="bg-[#111a2e] px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+          <div class="sm:flex sm:items-start">
+            <div class="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-500/10 sm:mx-0 sm:size-10">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6 text-red-400">
+                <path d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+              <h3 id="dialog-title" class="text-base font-semibold text-white">Supprimer une idee</h3>
+              <div class="mt-2">
+                <p class="text-sm text-gray-400">Es-tu sur de vouloir supprime ?</p>
+              </div>
+            </div>
+          </div>
+        </div>
+                  <div class="bg-gray-700/25 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+          <button
+          type="button"
+          onclick="confirmDelete()"
+          class="inline-flex w-full justify-center rounded-md bg-red-500 px-3 py-2 text-sm font-semibold text-white hover:bg-red-400 sm:ml-3 sm:w-auto"
+          >
+          Supprimer
+          </button>          
+          <button type="button" command="close" commandfor="dialog" class="mt-3 inline-flex w-full justify-center rounded-md bg-white/10 px-3 py-2 text-sm font-semibold text-white inset-ring inset-ring-white/5 hover:bg-white/20 sm:mt-0 sm:w-auto">Cancel</button>
+        </div>
+      </el-dialog-panel>
+    </div>
+  </dialog>
+</el-dialog>
+
+<!--modal pour la modification-->
+<dialog
+id="editDialog"
+class="bg-transparent backdrop:bg-black/50 rounded-xl"
+>
+
+<div class="bg-[#111a2e] border border-[#26324a] rounded-2xl p-5 
+            w-[95%] sm:w-[500px] mx-auto text-white 
+            max-h-[90vh] overflow-y-auto">
+
+    <h2 class="font-bold text-lg mb-4">
+        Modifier idée
+    </h2>
+
+    <form id="editForm" class="space-y-4">
+
+        <input type="hidden" id="editId">
+
+        <div>
+            <label>Titre</label>
+
+            <input
+            type="text"
+            id="editTitre"
+            class="w-full mt-1 bg-[#0b1220] border border-[#26324a] p-3 rounded-lg"
+            />
+        </div>
+
+        <div>
+            <label>Catégorie</label>
+
+            <select
+            id="editCategorie"
+            class="w-full mt-1 bg-[#0b1220] border border-[#26324a] p-3 rounded-lg"
+            >
+                <option value="pedagogie">
+                    Pédagogie
+                </option>
+
+                <option value="evenement">
+                    Événement
+                </option>
+
+                <option value="amelioration">
+                    Amelioration
+                </option>
+                <option value="campus">
+                    Campus
+                </option>
+            </select>
+        </div>
+
+        <div>
+            <label>Description</label>
+
+            <textarea
+            id="editDescription"
+            rows="4"
+            class="w-full mt-1 bg-[#0b1220] border border-[#26324a] p-3 rounded-lg"
+            ></textarea>
+        </div>
+
+        <div class="flex gap-2">
+
+            <button
+            type="submit"
+            class="flex-1 bg-green text-black font-bold py-3 rounded-lg"
+            >
+                Sauvegarder
+            </button>
+
+            <button
+            type="button"
+            onclick="closeEditModal()"
+            class="flex-1 bg-gray-700 py-3 rounded-lg"
+            >
+                Annuler
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+</dialog>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="apps.js"></script>
+</body>
+</html>
