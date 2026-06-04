@@ -124,7 +124,7 @@ boutons.forEach((btn) => {
             return;
         }
 
-        afficherCartes(data);
+        afficherCartes();
     });
 });
 
@@ -278,7 +278,7 @@ document.getElementById("form")
 
 
 afficherCartes();
-filtreCategorie();
+// filtreCategorie();
 
 // delete
 let deleteId = null;
@@ -360,7 +360,7 @@ document.getElementById("editForm")
 .addEventListener("submit",async (e)=>{
 
     e.preventDefault();
-    const message = loadMessages()
+    const message =await loadMessages()
 
     const id = (document.getElementById("editId").value);
 
@@ -422,7 +422,7 @@ async function genericCategorie(titre,description) {
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions",{
         method:"POST",
         headers:{
-            authorization:`Bearer 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`,
+            authorization:`Bearer `,
             "content-Type":"application/json"
         },
         body:JSON.stringify({
