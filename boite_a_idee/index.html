@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sunu-Idée UI</title>
+  <title>Sunu-Idée UI v2</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -48,7 +48,8 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
 
   <!-- LEFT -->
-  <div class="lg:col-span-8 space-y-6">
+  <!-- LEFT -->
+<div class="lg:col-span-8 space-y-6 order-2 lg:order-1">
 
     <!-- HERO -->
     <div class="bg-[#111a2e] border border-[#26324a] rounded-2xl p-4 sm:p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -143,7 +144,8 @@
   </div>
 
   <!-- RIGHT -->
-  <div class="lg:col-span-4">
+  <!-- RIGHT -->
+<div class="lg:col-span-4 order-1 lg:order-2">
     <form class="bg-[#111a2e] border border-[#26324a] rounded-2xl p-5 space-y-4 lg:sticky lg:top-6" method="post" id="form">
 
     <!-- TITLE -->
@@ -315,7 +317,6 @@ class="bg-transparent backdrop:bg-black/50 rounded-xl"
 </div>
 
 </dialog>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="apps.js"></script>
+<script src="./src/main.js" type="module"></script>
 </body>
 </html>
